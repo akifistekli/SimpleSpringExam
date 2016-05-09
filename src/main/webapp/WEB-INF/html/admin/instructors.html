@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Instructors</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Sex</th>
+					<th>Branch</th>
+					<th>E-mail</th>
+					<th>Creation Date</th>
+					<th>Active</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="instructor : ${instructors}" th:object="${instructor}">
+
+					<td th:text="${instructor.id}"></td>
+
+					<td th:text="${instructor.name}"></td>
+
+					<td th:text="${instructor.surname}"></td>
+
+					<td th:text="${instructor.sex}"></td>
+
+					<td th:text="${instructor.branch}"></td>
+
+					<td th:text="${instructor.email}"></td>
+
+					<td th:text="${instructor.createDate}"></td>
+
+					<td>
+						<input type="checkbox" class="checkbox" name="active" th:checked="*{isActive}" disabled="disabled"/>
+					</td>
+
+					<td>
+						<a th:href="@{/admin/update-instructor/__*{id}__}" class="btn btn-primary" title="Edit">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</a> 
+						<a th:href="@{/admin/active-instructor/__*{id}__}"  class="btn btn-danger"
+						title="In Active / Active">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+</th:block>

@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Update Instructor</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<div class="col-lg-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Update Instructor</h3>
+					</div>
+					<div class="panel-body">
+						<form role="form" th:action="@{/admin/update-instructor/__${instructor.id}__}"
+							th:object="${instructor}" method="POST">
+							<fieldset>
+								<div class="form-group">
+									<input class="form-control" placeholder="Name" name="name"
+										type="text" id="name" th:field="*{name}" required="required">
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Surname"
+										name="surname" type="text" id="surname" th:field="*{surname}"
+										required="required">
+								</div>
+								<div class="form-group">
+									<div class="btn-group" data-toggle="buttons">
+										<label class="btn btn-default" style="border-radius:5px 0px 0px 5px;"> 
+											<input type="radio"	id="sex1" th:field="*{sex}" name="sex" value="MALE" required="required"/> Male
+										</label>
+										<label class="btn btn-default" style="border-radius:0px 5px 5px 0px;"> 
+											<input type="radio"	id="sex2" th:field="*{sex}" name="sex" value="FEMALE" required="required"/> Female
+										</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<select name="branch_name" class="form-control">
+										<option th:value="*{branch}" th:text="*{branch}">Select</option>
+										<option>--------</option>
+										<option th:each="branch : ${branches}" th:value="${branch.name}" th:text="${branch.name}">Branch</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="E-mail" name="email"
+										type="email" id="email" th:field="*{email}"
+										required="required">
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Password"
+										name="password" type="password" id="password"
+										th:field="*{password}" required="required">
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Password Confirm"
+										name="password_confirm" type="password" id="password_confirm"
+										required="required">
+								</div>
+								<!-- Change this to a button or input when using this as a form -->
+								<input type="submit" value="Update"
+									class="btn btn-lg btn-success btn-block" />
+							</fieldset>
+						</form>
+						<br>
+						<div style="font-weight: bold;" class="alert alert-success fade in" th:text="${message}"
+								th:if="${message} != null"></div>
+						
+					</div>
+				</div>
+			</div>
+		
+	
+	</div>
+
+</th:block>

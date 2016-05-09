@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="container">
+		<div class="row">
+		
+			<p>Your exam has been finished!</p>
+			
+			<p>Here is your result:</p>
+			
+			Number of questions : <p th:text="${q}"></p>
+			Number of correct : <p th:text="${c}"></p>
+			Number of wrong : <p th:text="${w}"></p>
+			Number of blank : <p th:text="${b}"></p>
+				
+			<!--			
+			<div class="col-lg-12">
+				<div class="text-center">
+					<h1>Spring MVC - Online Exam - Exam Result</h1>
+				</div>
+				<br>
+			
+				<div th:each="question : ${questions}" th:object="${question}">
+					
+					<div class="well">
+						<div class="container">
+							<div style="float: left;"><h4 th:text="*{text}"></h4></div>
+						</div>
+					</div>
+
+					<div class="radio form-control">
+						<label th:value="*{ans1}" th:text="*{ans1}"></label>
+					</div>
+					<div class="radio form-control">
+					  	<label th:value="*{ans2}" th:text="*{ans2}"></label>
+					</div>
+					<div class="radio form-control">
+					  	<label th:value="*{ans3}" th:text="*{ans3}"></label>
+					</div>
+					<div class="radio form-control">
+					  	<label th:value="*{ans4}" th:text="*{ans4}"></label>
+					</div>			
+					<br>		
+					<hr>	
+					
+				</div>
+			</div>
+			-->
+			
+		</div>
+	</div>
+
+</th:block>

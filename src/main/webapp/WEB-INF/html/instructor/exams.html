@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Exams</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<table class="table table-hover table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Branch</th>
+					<th>Creation Date</th>
+					<th>Active</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="exam : ${exams}" th:object="${exam}">
+
+					<td th:text="*{id}"></td>
+
+					<td th:text="*{name}"></td>
+
+					<td th:text="*{description}"></td>
+
+					<td th:text="*{branch}"></td>
+
+					<td th:text="*{createDate}"></td>
+
+					<td>
+						<input type="checkbox" class="checkbox" name="active" th:checked="*{isActive}" disabled="disabled"/>
+					</td>
+
+					<td>
+						<a th:href="@{/instructor/update-exam/__*{id}__}" class="btn btn-primary" title="Edit">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</a> 
+						<a th:href="@{/instructor/active-exam/__*{id}__}"  class="btn btn-danger"
+						title="In Active / Active">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+</th:block>

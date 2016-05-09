@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Users</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<table class="table table-hover table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Sex</th>
+					<th>TC No</th>
+					<th>Email</th>
+					<th>Creation Date</th>
+					<th>Active</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}" th:object="${user}">
+
+					<td th:text="*{id}"></td>
+
+					<td th:text="*{name}"></td>
+
+					<td th:text="*{surname}"></td>
+
+					<td th:text="*{sex}"></td>
+
+					<td th:text="*{tcNo}"></td>
+
+					<td th:text="*{email}"></td>
+
+					<td th:text="*{createDate}"></td>
+
+					<td>
+						<input type="checkbox" class="checkbox" name="active" th:checked="*{isActive}" disabled="disabled"/>
+					</td>
+
+					<td>
+						<a th:href="@{/users/report/__*{id}__}"  class="btn btn-default" title="Result">
+							<i class="fa fa-bar-chart-o fa-fw"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+	
+	<!-- Report modal // data-toggle="modal" data-target=".delete-modal-sm" -->
+	<div class="modal fade col-lg-6 col-lg-offset-3" id="cancel" style="margin-top: 10px;" data-backdrop="static">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Cancel Exam</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure to cancel the exam? this can not be undo!
+			</div>
+			<div class="modal-footer">
+				<a th:href="@{/user/exam/cancel}" class="btn btn-success">OK</a>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+</th:block>

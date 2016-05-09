@@ -1,0 +1,114 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Questions</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<div class="col-lg-6">
+			<form th:action="@{/instructor/questions}" th:object="${exam}" method="POST">
+				<div class="col-lg-8">
+					<div class="form-group">
+						<select name="exam_id" class="form-control">
+							<option value="-1">Select Exam</option>
+							<option th:each="exam : ${exams}" th:value="${exam.id}" th:text="${exam.name}">Branch</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<input type="submit" value="Get Questions"	class="btn btn-success " />
+				</div>
+			</form>
+		</div>
+	
+		<table class="table table-hover table-condensed table-responsive" style="overflow: hidden;">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Exam</th>
+					<th>Question</th>
+					<th>Active</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question : ${questions}" th:object="${question}">
+
+					<td th:text="*{id}"></td>
+
+					<td th:text="*{exam_id}"></td>
+
+					<td th:text="*{text}"></td>
+
+					<td>
+						<input type="checkbox" class="checkbox" name="active" th:checked="*{isActive}" disabled="disabled"/>
+					</td>
+
+					<td>
+						<a data-toggle="modal" th:attr="href='#'+${question.id}" class="btn btn-default" title="Details">
+							<i class="glyphicon glyphicon-list"></i>
+						</a>
+						<a th:href="@{/instructor/update-question/__*{id}__}" class="btn btn-primary" title="Edit">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</a> 
+						<a th:href="@{/instructor/active-question/__*{id}__}"  class="btn btn-danger"
+						title="In Active / Active">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</td>
+					
+					<!-- Details modal // data-toggle="modal" data-target=".delete-modal-sm" -->
+					<div class="modal fade col-lg-6 col-lg-offset-3" style="margin-top: 10px;" th:attr="id=${question.id}" data-backdrop="static">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Question's Details</h4>
+							</div>
+							<div class="modal-body">
+								<div class="col-lg-3"><b>Exam ID : </b></div>
+								<div class="col-lg-9"><p th:text="*{exam_id}"></p></div>
+								
+								<div class="col-lg-3"><b>Question : </b></div>
+								<div class="col-lg-9"><p th:text="*{text}"></p></div>
+								
+								<div class="col-lg-3"><b>Option 1 : </b></div>
+								<div class="col-lg-9"><p th:text="*{ans1}"></p></div>
+								
+								<div class="col-lg-3"><b>Option 2 : </b></div>
+								<div class="col-lg-9"><p th:text="*{ans2}"></p></div>
+								
+								<div class="col-lg-3"><b>Option 3 : </b></div>
+								<div class="col-lg-9"><p th:text="*{ans3}"></p></div>
+								
+								<div class="col-lg-3"><b>Option 4 : </b></div>
+								<div class="col-lg-9"><p th:text="*{ans4}"></p></div>
+								
+								<div class="col-lg-3"><b>Correct : </b></div>
+								<div class="col-lg-9"><p th:text="*{correct}"></p></div>
+								
+								<div class="col-lg-3"><b>Date : </b></div>
+								<div class="col-lg-9"><p th:text="*{createDate}"></p></div>
+								
+								<div class="col-lg-3"><b>Active : </b></div>
+								<div class="col-lg-9"><p th:text="*{isActive}"></p></div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+					
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+</th:block>

@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+	<meta charset="utf-8">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Profile</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<img th:src="@{/resources/img/user.png}" class="img-circle img-thumbnail img-responsive">
+		</div>
+		<div class="col-lg-6">
+			<table class="table table-hover table-responsive table-striped">
+				<tr>
+					<th>Name</th>
+					<td>Recep</td>
+				</tr>
+				<tr>
+					<th>Surname</th>
+					<td>Çoban</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>recep@mail.com</td>
+				</tr>
+				<tr>
+					<th>Sex</th>
+					<td>Male</td>
+				</tr>
+				<tr>
+					<th>Creation Date</th>
+					<td>2016</td>
+				</tr>
+				<tr>
+					<th>Active</th>
+					<td>True</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</th:block>

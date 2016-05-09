@@ -1,0 +1,97 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Update Question</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<div class="col-lg-5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Update Question</h3>
+				</div>
+				<div class="panel-body">
+				
+					<form role="form" th:action="@{/instructor/update-question/__${question.id}__}"
+						th:object="${question}" method="POST">
+						<fieldset>
+							<div class="form-group">
+								<select name="exam_id" class="form-control">
+									<option th:value="${exam_by_id.id}" th:text="${exam_by_id.name}">Select</option>
+									<option>--------</option>
+									<option th:each="exam : ${exams}" th:value="${exam.id}" th:text="${exam.name}">Branch</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<textarea rows="5" class="form-control" placeholder="Question" name="text"
+								 id="text" th:field="*{text}" required="required"></textarea>
+							</div>
+							
+							<div class="form-group">
+								<input class="form-control" placeholder="Option 1"
+									name="ans1" type="text" id="ans1" th:field="*{ans1}"
+									required="required">
+							</div>
+							
+							<div class="form-group">
+								<input class="form-control" placeholder="Option 2"
+									name="ans2" type="text" id="ans2" th:field="*{ans2}"
+									required="required">
+							</div>
+							
+							<div class="form-group">
+								<input class="form-control" placeholder="Option 3"
+									name="ans3" type="text" id="ans3" th:field="*{ans3}"
+									required="required">
+							</div>
+							
+							<div class="form-group">
+								<input class="form-control" placeholder="Option 4"
+									name="ans4" type="text" id="ans4" th:field="*{ans4}"
+									required="required">
+							</div>
+							
+							<div class="form-group">
+								<select name="correct" class="form-control">
+									<option value="SelectCorrectAnswer">Select Correct Answer</option>
+									<option th:field="*{correct}" value="Option 1" id="opt1">Option 1</option>
+									<option th:field="*{correct}" value="Option 2" id="opt2">Option 2</option>
+									<option th:field="*{correct}" value="Option 3" id="opt3">Option 3</option>
+									<option th:field="*{correct}" value="Option 4" id="opt4">Option 4</option>
+								</select>
+							</div>
+							
+							<script type="text/javascript">
+								var myVar = setInterval(function(){ getAnswer() }, 100);
+								function getAnswer(){
+									document.getElementById("opt1").innerHTML = document.getElementById("ans1").value;
+									document.getElementById("opt2").innerHTML = document.getElementById("ans2").value;
+									document.getElementById("opt3").innerHTML = document.getElementById("ans3").value;
+									document.getElementById("opt4").innerHTML = document.getElementById("ans4").value;
+									
+									document.getElementById("opt1").value = document.getElementById("ans1").value;
+									document.getElementById("opt2").value = document.getElementById("ans2").value;
+									document.getElementById("opt3").value = document.getElementById("ans3").value;
+									document.getElementById("opt4").value = document.getElementById("ans4").value;
+								}
+							</script>
+							
+							<!-- Change this to a button or input when using this as a form -->
+							<input type="submit" value="Submit"
+								class="btn btn-lg btn-success btn-block" />
+						</fieldset>
+					</form>
+					<br> 
+					<div style="font-weight: bold;" th:text="${message}"
+							th:if="${message} != null"></div>
+					
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+</th:block>

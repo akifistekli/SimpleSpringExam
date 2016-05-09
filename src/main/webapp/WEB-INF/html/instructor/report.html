@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Report</h1>
+		</div>
+	</div>
+	<div class="row">
+	
+		<div class="col-lg-6">
+			<form th:action="@{/instructor/report}" th:object="${exam}" method="POST">
+				<div class="col-lg-8">
+					<div class="form-group">
+						<select name="exam_id" class="form-control">
+							<option value="-1">Select Exam</option>
+							<option th:each="exam : ${exams}" th:value="${exam.id}" th:text="${exam.name}">Branch</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<input type="submit" value="Get Questions"	class="btn btn-success " />
+				</div>
+			</form>
+		</div>
+		
+		<div class="col-lg-12">
+		
+			<p th:text="${message}" style="color: red;"></p>
+			
+			<div class="form-control" id="piechart_3d" style="width: 900px; height: 500px;"></div>
+		
+		</div>
+
+	</div>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+		 google.charts.load("current", {packages:["corechart"]});
+	     google.charts.setOnLoadCallback(drawChart);
+	       
+	     function drawChart() {
+	       var data = google.visualization.arrayToDataTable([
+	         ['Exam', 'Exam Result'],
+	         ['Correct', [[${no_correct}]]],
+	         ['Wrong',     [[${no_wrong}]]],
+	         ['Blank',     [[${no_blank}]]]
+	       ]);
+	
+	       var options = {
+	         title: [[${exam_name}]],
+	         is3D: true,
+	       };
+	
+	       var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+	       chart.draw(data, options);
+	     }
+	</script>
+
+</th:block>
